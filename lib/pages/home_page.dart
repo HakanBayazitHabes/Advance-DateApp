@@ -1,7 +1,9 @@
 import 'package:advance_date_app/Component/post_item.dart';
+import 'package:advance_date_app/Component/toolbar.dart';
 import 'package:advance_date_app/styles/app_colors.dart';
 import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -12,12 +14,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     mockUsersFromServer();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-        backgroundColor: AppColors.background,
-        elevation: 0,
+      appBar: Toolbar(
+        title: 'Home Page',
         actions: [
-          Icon(Icons.location_on_outlined),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset('assets/svg/ic_location.svg'),
+          ),
         ],
       ),
       body: ListView.separated(

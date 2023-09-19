@@ -1,4 +1,5 @@
 import 'package:advance_date_app/pages/home_page.dart';
+import 'package:advance_date_app/pages/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +25,8 @@ class _MainPageState extends State<MainPage> {
               'assets/svg/ic_home.svg',
               width: 24,
               height: 24,
+              color: Colors.white,
+
             ),
             label: 'Home',
           ),
@@ -32,6 +35,8 @@ class _MainPageState extends State<MainPage> {
               'assets/svg/ic_favorite.svg',
               width: 24,
               height: 24,
+              color: Colors.white,
+
             ),
             label: 'Favorite',
           ),
@@ -40,6 +45,8 @@ class _MainPageState extends State<MainPage> {
               'assets/svg/ic_messages.svg',
               width: 24,
               height: 24,
+              color: Colors.white,
+
             ),
             label: 'Messages',
           ),
@@ -48,6 +55,8 @@ class _MainPageState extends State<MainPage> {
               'assets/svg/ic_messages.svg',
               width: 24,
               height: 24,
+              color: Colors.white,
+
             ),
             label: 'Messages',
           ),
@@ -56,6 +65,7 @@ class _MainPageState extends State<MainPage> {
               'assets/svg/ic_user.svg',
               width: 24,
               height: 24,
+              color: Colors.white,
             ),
             label: 'User',
           ),
@@ -85,8 +95,6 @@ class _MainPageState extends State<MainPage> {
     Center(
       child: Text('Messages'),
     ),
-    Center(
-      child: Text('User'),
-    ),
+    ProfilePage(),
   ];
 }
