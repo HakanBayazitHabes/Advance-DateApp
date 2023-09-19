@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -77,7 +79,7 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      print('Login Clicked');
+                      Navigator.of(context).pushReplacementNamed('/main');
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
