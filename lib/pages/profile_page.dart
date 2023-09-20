@@ -1,4 +1,5 @@
 import 'package:advance_date_app/Component/toolbar.dart';
+import 'package:advance_date_app/config/app_routes.dart';
 import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class ProfilePage extends StatelessWidget {
             onSelected: (value) {
               switch (value) {
                 case ProfileMenu.edit:
-                  print('edit');
+                  Navigator.of(context).pushNamed(AppRoutes.editProfile);
                   break;
                 case ProfileMenu.settings:
                   print('settings');

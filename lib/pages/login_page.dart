@@ -1,3 +1,6 @@
+import 'package:advance_date_app/config/app_icons.dart';
+import 'package:advance_date_app/config/app_routes.dart';
+import 'package:advance_date_app/config/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +23,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 Spacer(),
                 Text(
-                  'Hello, welcome back!',
+                  AppStrings.helloWelcome,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -29,7 +32,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Login to continue',
+                  AppStrings.loginToContinue,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,
@@ -79,7 +82,8 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/main');
+                      Navigator.of(context)
+                          .pushReplacementNamed(AppRoutes.main);
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
@@ -145,7 +149,7 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/facebook.png',
+                          AppIcons.icFacebook,
                           width: 22,
                           height: 22,
                         ),

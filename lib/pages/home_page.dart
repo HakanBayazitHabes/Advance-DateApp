@@ -1,5 +1,6 @@
 import 'package:advance_date_app/Component/post_item.dart';
 import 'package:advance_date_app/Component/toolbar.dart';
+import 'package:advance_date_app/config/app_strings.dart';
 import 'package:advance_date_app/styles/app_colors.dart';
 import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
     mockUsersFromServer();
     return Scaffold(
       appBar: Toolbar(
-        title: 'Home Page',
+        title: AppStrings.appName,
         actions: [
           IconButton(
             onPressed: () {},

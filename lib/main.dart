@@ -1,3 +1,5 @@
+import 'package:advance_date_app/config/app_routes.dart';
+import 'package:advance_date_app/pages/edit_profile_page.dart';
 import 'package:advance_date_app/pages/home_page.dart';
 import 'package:advance_date_app/pages/main_page.dart';
 import 'package:advance_date_app/styles/app_colors.dart';
@@ -13,16 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          fontFamily: 'Urbanist',
-          scaffoldBackgroundColor: AppColors.background,
-          brightness: Brightness.dark,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LoginPage(),
-          '/home': (context) => HomePage(),
-          '/main': (context) => MainPage(),
-        });
+      theme: ThemeData(
+        fontFamily: 'Urbanist',
+        scaffoldBackgroundColor: AppColors.background,
+        brightness: Brightness.dark,
+      ),
+      initialRoute: AppRoutes.login,
+      routes: AppRoutes.pages,
+    );
   }
 }
