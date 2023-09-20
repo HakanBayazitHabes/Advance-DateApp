@@ -2,6 +2,7 @@ import 'package:advance_date_app/Component/app_text_field.dart';
 import 'package:advance_date_app/Component/toolbar.dart';
 import 'package:advance_date_app/Component/user_avatar.dart';
 import 'package:advance_date_app/styles/app_colors.dart';
+import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
 
 import '../config/app_strings.dart';
@@ -69,35 +70,76 @@ class _EditProfilePageState extends State<EditProfilePage> {
             AppTextField(hint: AppStrings.location),
             SizedBox(height: 16),
             AppTextField(hint: AppStrings.birthday),
-            RadioListTile(
-              title: Text(AppStrings.male),
-              value: Gender.male,
-              groupValue: gender,
-              onChanged: (value) {
-                setState(() {
-                  gender = Gender.male;
-                });
-              },
-            ),
-            RadioListTile(
-              title: Text(AppStrings.female),
-              value: Gender.female,
-              groupValue: gender,
-              onChanged: (value) {
-                setState(() {
-                  gender = Gender.female;
-                });
-              },
-            ),
-            RadioListTile(
-              title: Text(AppStrings.other),
-              value: Gender.other,
-              groupValue: gender,
-              onChanged: (value) {
-                setState(() {
-                  gender = Gender.other;
-                });
-              },
+            SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 6),
+              decoration: BoxDecoration(
+                color: AppColors.fieldColor,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppStrings.gender,
+                    style: AppText.body1.copyWith(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: RadioListTile(
+                          title: Text(AppStrings.male),
+                          value: Gender.male,
+                          visualDensity: const VisualDensity(
+                            horizontal: VisualDensity.minimumDensity,
+                          ),
+                          contentPadding: EdgeInsets.zero,
+                          groupValue: gender,
+                          onChanged: (value) {
+                            setState(() {
+                              gender = Gender.male;
+                            });
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: RadioListTile(
+                          title: Text(AppStrings.female),
+                          value: Gender.female,
+                          visualDensity: const VisualDensity(
+                            horizontal: VisualDensity.minimumDensity,
+                          ),
+                          contentPadding: EdgeInsets.zero,
+                          groupValue: gender,
+                          onChanged: (value) {
+                            setState(() {
+                              gender = Gender.female;
+                            });
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: RadioListTile(
+                          title: Text(AppStrings.other),
+                          value: Gender.other,
+                          visualDensity: const VisualDensity(
+                            horizontal: VisualDensity.minimumDensity,
+                          ),
+                          contentPadding: EdgeInsets.zero,
+                          groupValue: gender,
+                          onChanged: (value) {
+                            setState(() {
+                              gender = Gender.other;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ]),
         ),
