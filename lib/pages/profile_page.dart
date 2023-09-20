@@ -1,4 +1,5 @@
 import 'package:advance_date_app/Component/toolbar.dart';
+import 'package:advance_date_app/Component/user_avatar.dart';
 import 'package:advance_date_app/config/app_routes.dart';
 import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
@@ -51,13 +52,8 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(45),
-            child: Image.asset(
-              'assets/temp/user1.png',
-              width: 90,
-              height: 90,
-            ),
+          UserAvatar(
+            size: 90,
           ),
           SizedBox(
             height: 24,

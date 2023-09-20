@@ -1,3 +1,4 @@
+import 'package:advance_date_app/config/app_icons.dart';
 import 'package:advance_date_app/pages/home_page.dart';
 import 'package:advance_date_app/pages/profile_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,47 +23,43 @@ class _MainPageState extends State<MainPage> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svg/ic_home.svg',
+              AppIcons.icHome,
               width: 24,
               height: 24,
               color: Colors.white,
-
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svg/ic_favorite.svg',
+              AppIcons.icFavorite,
               width: 24,
               height: 24,
               color: Colors.white,
-
             ),
             label: 'Favorite',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svg/ic_messages.svg',
+              AppIcons.icAdd,
               width: 24,
               height: 24,
               color: Colors.white,
-
             ),
             label: 'Messages',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svg/ic_messages.svg',
+              AppIcons.icMessage,
               width: 24,
               height: 24,
               color: Colors.white,
-
             ),
             label: 'Messages',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svg/ic_user.svg',
+              AppIcons.icUser,
               width: 24,
               height: 24,
               color: Colors.white,
