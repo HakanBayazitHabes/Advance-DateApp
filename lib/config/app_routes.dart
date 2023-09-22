@@ -2,7 +2,6 @@ import 'package:advance_date_app/pages/nearby_page.dart';
 import 'package:advance_date_app/provider/login_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../model/user.dart';
 import '../pages/edit_profile_page.dart';
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';

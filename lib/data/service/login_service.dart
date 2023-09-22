@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:advance_date_app/data/response/login_response.dart';
-import 'package:advance_date_app/model/user.dart';
+import 'package:advance_date_app/data/service/base_service.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config/app_config.dart';
 
-class LoginService {
+class LoginService extends ServiceBase<LoginResponse> {
   final String username;
   final String password;
 
