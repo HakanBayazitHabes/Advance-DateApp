@@ -3,18 +3,18 @@ import 'package:advance_date_app/Component/user_avatar.dart';
 import 'package:advance_date_app/config/app_routes.dart';
 import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../model/user.dart';
+import '../provider/app_repo.dart';
 
 enum ProfileMenu { edit, settings, logout }
 
 class ProfilePage extends StatelessWidget {
-  final User user;
-
-  const ProfilePage({super.key, required this.user});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<AppRepo>().user;
     return Scaffold(
       appBar: Toolbar(
         title: 'Profile',
@@ -63,7 +63,7 @@ class ProfilePage extends StatelessWidget {
             height: 24,
           ),
           Text(
-            '${user.firstname} ${user.lastname}',
+            '${user?.firstname} ${user?.lastname}',
             style: AppText.header2,
           ),
           SizedBox(

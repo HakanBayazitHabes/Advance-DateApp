@@ -3,19 +3,12 @@ import 'dart:convert';
 import 'package:advance_date_app/config/app_icons.dart';
 import 'package:advance_date_app/config/app_routes.dart';
 import 'package:advance_date_app/config/app_strings.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:advance_date_app/provider/app_repo.dart';
+import 'package:advance_date_app/provider/login_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import '../model/user.dart';
-import 'main_page.dart';
-
-const baseUrl = 'https://19oj5.wiremockapi.cloud';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
-  final loginRoute = Uri.parse('$baseUrl/login');
-  var username = '';
-  var password = '';
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -53,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 Spacer(),
                 TextField(
                   onChanged: (value) {
-                    username = value;
+                    context.read<LoginProvider>().username = value;
                   },
                   controller: usernameController,
                   decoration: InputDecoration(
@@ -70,7 +63,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 20),
                 TextField(
                   onChanged: (value) {
-                    password = value;
+                    context.read<LoginProvider>().password = value;
                   },
                   controller: passwordController,
                   decoration: InputDecoration(
@@ -102,15 +95,12 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
-                      final user = await doLogin();
-                      Navigator.of(context).push(
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) {
-                            return MainPage(user: user);
-                          },
-                        ),
-                      );
+                      context.read<LoginProvider>().login().then((value) {
+                        context.read<AppRepo>().user = value.user;
+                        context.read<AppRepo>().token = value.token;
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.main);
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
@@ -211,24 +201,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<User> doLogin() async {
-    final username = usernameController.text;
-    final password = passwordController.text;
-    final body = {'username': username, 'password': password};
-    final response = await http.post(
-      loginRoute,
-      body: jsonEncode(body),
-    );
-    if (response.statusCode == 200) {
-      print(response.body);
-      final json = jsonDecode(response.body);
-      final user = User.fromJson(json['data']);
-      return user;
-    } else {
-      print('Login failed');
-      throw Exception('Failed to login');
-    }
   }
 }
