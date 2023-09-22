@@ -1,5 +1,6 @@
 import 'package:advance_date_app/Component/post_item.dart';
 import 'package:advance_date_app/Component/toolbar.dart';
+import 'package:advance_date_app/config/app_routes.dart';
 import 'package:advance_date_app/config/app_strings.dart';
 import 'package:advance_date_app/styles/app_colors.dart';
 import 'package:advance_date_app/styles/app_text.dart';
@@ -19,7 +20,9 @@ class HomePage extends StatelessWidget {
         title: AppStrings.appName,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.nearby);
+            },
             icon: SvgPicture.asset('assets/svg/ic_location.svg'),
           ),
         ],
