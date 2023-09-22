@@ -6,10 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../model/user.dart';
 import '../styles/app_colors.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final User user;
+
+  const MainPage({super.key, required this.user});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -22,7 +25,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: pages[currentIndex.index],
+      body: pages()[currentIndex.index],
       bottomNavigationBar: MyBottomNavigation(
         currentIndex: currentIndex,
         onTap: (value) {
@@ -34,19 +37,19 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  final pages = [
-    HomePage(),
-    Center(
-      child: Text('Favorite'),
-    ),
-    Center(
-      child: Text('Add Post'),
-    ),
-    Center(
-      child: Text('Messages'),
-    ),
-    ProfilePage(),
-  ];
+  pages() => [
+        HomePage(),
+        Center(
+          child: Text('Favorite'),
+        ),
+        Center(
+          child: Text('Add Post'),
+        ),
+        Center(
+          child: Text('Messages'),
+        ),
+        ProfilePage(user: widget.user),
+      ];
 }
 
 enum Menus { home, favorite, add, messages, user }
