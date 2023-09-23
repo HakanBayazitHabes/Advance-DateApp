@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Component/new_post_modal.dart';
 import '../styles/app_colors.dart';
 
 class MainPage extends StatefulWidget {
@@ -26,6 +27,17 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: MyBottomNavigation(
         currentIndex: currentIndex,
         onTap: (value) {
+          if (value == Menus.add) {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) {
+                return NewPostModal();
+              },
+            );
+            return;
+          }
           setState(() {
             currentIndex = value;
           });

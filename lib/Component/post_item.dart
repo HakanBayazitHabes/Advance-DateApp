@@ -30,10 +30,12 @@ class PostItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 12,
-          ),
-          Image.asset('assets/temp/post1.jpg'),
+          if (post.image != null) ...[
+            SizedBox(
+              height: 12,
+            ),
+            Image.asset('assets/temp/post1.jpg'),
+          ],
           SizedBox(
             height: 12,
           ),
