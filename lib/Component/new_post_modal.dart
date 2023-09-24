@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:advance_date_app/Component/app_text_field.dart';
 import 'package:advance_date_app/provider/app_repo.dart';
 import 'package:advance_date_app/styles/app_colors.dart';
 import 'package:advance_date_app/styles/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/post_provider.dart';
@@ -50,20 +53,45 @@ class NewPostModal extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Container(
-            width: 200,
-            height: 149,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-                width: 2,
+          Consumer<PostProvider>(
+            builder: (context, value, child) => GestureDetector(
+              onTap: () {
+                context.read<PostProvider>().pickImage(ImageSource.gallery);
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16),
+                  ),
+                ),
+                child: value.imagePath == null
+                    ? Center(
+                        child: Text('Upload from gallery'),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(16),
+                        ),
+                        child: Stack(
+                          children: [
+                            Image.file(File(value.imagePath!)),
+                            IconButton(
+                                onPressed: () {
+                                  value.deleteImage();
+                                },
+                                icon: Icon(
+                                  Icons.delete_rounded,
+                                  color: Colors.red,
+                                ))
+                          ],
+                        )),
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(16),
-              ),
-            ),
-            child: Center(
-              child: Text('Upload from gallery'),
             ),
           ),
           SizedBox(
