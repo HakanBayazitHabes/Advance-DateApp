@@ -1,5 +1,6 @@
 import 'package:advance_date_app/Component/bottom_navigation.dart';
 import 'package:advance_date_app/config/app_icons.dart';
+import 'package:advance_date_app/pages/chat_page.dart';
 import 'package:advance_date_app/pages/home_page.dart';
 import 'package:advance_date_app/pages/profile_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,9 +55,7 @@ class _MainPageState extends State<MainPage> {
     Center(
       child: Text('Add Post'),
     ),
-    Center(
-      child: Text('Messages'),
-    ),
+    ChatPage(),
     ProfilePage(),
   ];
 }
