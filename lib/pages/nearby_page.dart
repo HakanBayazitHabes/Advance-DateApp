@@ -1,4 +1,5 @@
 import 'package:advance_date_app/Component/toolbar.dart';
+import 'package:advance_date_app/Component/user_page_item.dart';
 import 'package:advance_date_app/config/app_icons.dart';
 import 'package:advance_date_app/config/app_strings.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,10 @@ class NearbyPage extends StatefulWidget {
 
 class _NearbyPageState extends State<NearbyPage> {
   late final Future<List<User>> futureUsers;
+  final pageController = PageController(
+    viewportFraction: 0.85,
+    initialPage: 0,
+  );
 
   @override
   void initState() {
@@ -42,62 +47,86 @@ class _NearbyPageState extends State<NearbyPage> {
             return Center(child: CircularProgressIndicator());
           }
           final users = snapshot.data!;
-          return FlutterMap(
-            options: MapOptions(
-              center: LatLng(51.509364, -0.128928),
-              zoom: 10,
-            ),
+          return Stack(
             children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'dev.ces.flutter',
+              FlutterMap(
+                options: MapOptions(
+                  center: LatLng(51.509364, -0.128928),
+                  zoom: 10,
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'dev.ces.flutter',
+                  ),
+                  MarkerLayer(
+                    markers: users
+                        .map((user) => Marker(
+                              width: 200,
+                              height: 100,
+                              point: LatLng(user.location?.lat ?? 0,
+                                  user.location?.lng ?? 0),
+                              builder: (context) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    pageController.animateToPage(
+                                        users.indexOf(user),
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(14)),
+                                        ),
+                                        child: Text(
+                                          '${user.firstname} ${user.lastname}}',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ),
+                                      CustomPaint(
+                                        painter: MarkerPainter(),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.5),
+                                          child: ClipPath(
+                                            clipper: MarkerClipper(),
+                                            child: SizedBox(
+                                                width: 48,
+                                                height: 60,
+                                                child: Image.asset(
+                                                  'assets/temp/user1.png',
+                                                  fit: BoxFit.cover,
+                                                )),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ))
+                        .toList(),
+                  ),
+                ],
               ),
-              MarkerLayer(
-                markers: users
-                    .map((user) =>
-                    Marker(
-                      width: 200,
-                      height: 100,
-                      point: LatLng(
-                          user.location?.lat ?? 0, user.location?.lng ?? 0),
-                      builder: (context) {
-                        return Column(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(14)),
-                              ),
-                              child: Text(
-                                '${user.firstname} ${user.lastname}}',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            CustomPaint(
-                              painter: MarkerPainter(),
-                              child: Padding(
-                                padding: const EdgeInsets.all(1.5),
-                                child: ClipPath(
-                                  clipper: MarkerClipper(),
-                                  child: SizedBox(
-                                      width: 48,
-                                      height: 60,
-                                      child: Image.asset(
-                                        'assets/temp/user1.png',
-                                        fit: BoxFit.cover,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ))
-                    .toList(),
-              ),
+              Positioned(
+                right: 0,
+                left: 0,
+                bottom: 0,
+                child: SizedBox(
+                  height: 250,
+                  child: PageView(
+                    controller: pageController,
+                    children: users.map((e) => UserPageItem(user: e)).toList(),
+                  ),
+                ),
+              )
             ],
           );
         },
