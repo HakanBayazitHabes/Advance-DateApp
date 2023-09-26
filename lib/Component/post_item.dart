@@ -1,3 +1,4 @@
+import 'package:advance_date_app/config/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import '../data/model/post.dart';
@@ -10,37 +11,42 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                'assets/temp/user1.png',
-                width: 40,
-                height: 40,
-              ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(AppRoutes.user);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Image.asset(
+                  'assets/temp/user1.png',
+                  width: 40,
+                  height: 40,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  '${post.owner?.firstname} ${post.owner?.lastname}',
+                  style: AppText.subtitle3,
+                ),
+              ],
+            ),
+            if (post.image != null) ...[
               SizedBox(
-                width: 16,
+                height: 12,
               ),
-              Text(
-                '${post.owner?.firstname} ${post.owner?.lastname}',
-                style: AppText.subtitle3,
-              ),
+              Image.asset('assets/temp/post1.jpg'),
             ],
-          ),
-          if (post.image != null) ...[
             SizedBox(
               height: 12,
             ),
-            Image.asset('assets/temp/post1.jpg'),
+            Text(post.message ?? '', style: AppText.subtitle3),
           ],
-          SizedBox(
-            height: 12,
-          ),
-          Text(post.message ?? '', style: AppText.subtitle3),
-        ],
+        ),
       ),
     );
   }
